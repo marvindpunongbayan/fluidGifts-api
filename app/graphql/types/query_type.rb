@@ -13,5 +13,14 @@ module Types
     def test_field
       "Hello World!"
     end
+
+    field :users,
+          [Types::UserType],
+          null: false,
+          description: "Returns a list of users in the app"
+
+    def users
+      User.all
+    end
   end
 end

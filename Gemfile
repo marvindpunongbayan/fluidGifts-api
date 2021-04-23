@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# All custom gems, arrange by alphabaetical
+gem 'bcrypt'
 gem "graphql", "~> 1.9"
 gem 'graphql-query-resolver'
 gem 'search_object'
