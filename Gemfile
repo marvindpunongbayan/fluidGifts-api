@@ -27,9 +27,12 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # All custom gems, arrange by alphabaetical
+gem 'active_storage_base64'
 gem 'bcrypt'
-gem "graphql", "~> 1.9"
+gem 'graphql', '~> 1.9'
+gem 'graphql-batch'
 gem 'graphql-query-resolver'
+gem 'mini_magick'
 gem 'search_object'
 gem 'search_object_graphql'
 

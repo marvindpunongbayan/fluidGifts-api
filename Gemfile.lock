@@ -39,6 +39,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_base64 (1.2.0)
+      rails (~> 6.1)
     activejob (6.1.3.1)
       activesupport (= 6.1.3.1)
       globalid (>= 0.3.6)
@@ -83,6 +85,9 @@ GEM
       railties
       sprockets-rails
     graphql (1.12.8)
+    graphql-batch (0.4.3)
+      graphql (>= 1.3, < 2)
+      promise.rb (~> 0.7.2)
     graphql-query-resolver (0.2.0)
       graphql (~> 1.0, >= 1.0.0)
     i18n (1.8.10)
@@ -99,6 +104,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
     method_source (1.0.0)
+    mini_magick (4.11.0)
     mini_mime (1.0.3)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -111,6 +117,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.0)
       ast (~> 2.4.1)
+    promise.rb (0.7.4)
     puma (5.2.2)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -231,15 +238,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_storage_base64
   bcrypt
   bootsnap (>= 1.4.4)
   byebug
   factory_bot_rails
   graphiql-rails
   graphql (~> 1.9)
+  graphql-batch
   graphql-query-resolver
   jbuilder (~> 2.7)
   listen
+  mini_magick
   mysql2 (~> 0.5)
   puma (~> 5.0)
   rails (~> 6.1.3, >= 6.1.3.1)

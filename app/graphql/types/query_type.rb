@@ -17,10 +17,19 @@ module Types
     field :users,
           [Types::UserType],
           null: false,
-          description: "Returns a list of users in the app"
+          description: "Returns a list of users"
 
     def users
       User.all
+    end
+
+    field :users_with_image,
+          [Types::UserType],
+          null: false,
+          description: "Returns a list of users with image"
+
+    def users_with_image
+      User.all.has_attached_image
     end
   end
 end

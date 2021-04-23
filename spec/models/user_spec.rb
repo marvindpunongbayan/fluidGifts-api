@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
       expect(duplicate_user).to_not be_valid
     end
 
-    it "muust  email format is invalid" do
+    it "must  email format is invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com]
       addresses.each do |invalid_address|
         user.email = invalid_address
@@ -57,6 +57,21 @@ RSpec.describe User, type: :model do
       user.password = nil
       expect(user).to_not be_valid
     end    
+  end
+
+  describe "with a valid image" do
+    before(:each) do
+      @user = create(:user)
+    end
+
+    it "is attached" do
+      @user.image.attach(
+        io: File.open(Rails.root.join('spec', 'factories', 'images', 'test.png')),
+        filename: 'test.png',
+        content_type: 'image/png'
+      )
+      expect(@user.image).to be_attached
+    end
   end
 
   describe "future-proofs" do

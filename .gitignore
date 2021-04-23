@@ -80,6 +80,7 @@ pickle-email-*.html
 # Ignore application configuration
 /config/application.yml
 /config/aws.yml
+/storage/*
 dump.rdb
 **.rdb
 *.rdb
