@@ -31,10 +31,9 @@ gem 'active_storage_base64'
 gem 'bcrypt'
 gem 'graphql', '~> 1.9'
 gem 'graphql-batch'
-gem 'graphql-query-resolver'
+gem 'image_processing'
 gem 'mini_magick'
-gem 'search_object'
-gem 'search_object_graphql'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

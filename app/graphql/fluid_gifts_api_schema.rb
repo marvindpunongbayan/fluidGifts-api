@@ -1,6 +1,7 @@
 class FluidGiftsApiSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
+  GraphQL::Batch.use(self)
 
   # rescue_from(ActiveRecord::Unauthorized) do |err, obj, args, ctx, field|
   #   GraphQL::ExecutionError.new("Unauthorized error", options: {status: :unauthorized, code: 401})

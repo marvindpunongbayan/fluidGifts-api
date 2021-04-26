@@ -41,5 +41,6 @@ module FluidGiftsApi
       g.helper          false
       g.channel         assets: false
     end
+    config.active_storage.variant_processor
   end
 end

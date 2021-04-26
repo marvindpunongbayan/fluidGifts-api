@@ -26,7 +26,7 @@ RSpec.describe Types::QueryType do
     it "there's a missing or new query parameters (future-proofs)" do
       expect(result.dig("data", "users")).to match_array(
         users.map { |user| { 
-          "id" => "#{user.id}", 
+          "id" => be_present, 
           "name" => "#{user.name}",
           "email" => "#{user.email}"
         }}

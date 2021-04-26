@@ -11,7 +11,7 @@ module Mutations
               "signinUser" => {
                 'token' => be_present,
                 'user' => { 
-                  'id' => user.id.to_s,
+                  'id' => be_present,
                   'name' => user.name,
                   'email' => user.email
                 }
