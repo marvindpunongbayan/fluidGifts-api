@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_secure_password
 
   scope :has_attached_image, -> { joins(:image_attachment) }
+  scope :without_attached_image, -> {where.missing(:image_attachment)}
   
   validates :name, presence: true, length: { minimum: 3 }
   validates :email,

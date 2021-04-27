@@ -33,6 +33,7 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Store uploaded files on the local file system in a temporary directory.
+  config.active_job.queue_adapter = :inline
   config.active_storage.service = :test
 
   config.action_mailer.perform_caching = false

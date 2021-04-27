@@ -1,24 +1,19 @@
 module Resolvers
   class AllUsers < GraphQL::Schema::Resolver
     class UserFilter < Types::BaseInputObject
-      argument :name_contains, String, required: false
-      argument :email_contains, String, required: false
-    end
-
-    class UserOperator < ::Types::BaseEnum
-      value 'OR'
-      value 'AND'
+      argument :name_contains, String, required: false, description: "Find all string matches"
+      argument :email_contains, String, required: false, description: "Find all string matches"
+      argument :with_image, Boolean, required: false, description: "Returns users with attached image"
     end
 
     argument :filter, UserFilter, required: false
-    argument :filterOperator, UserOperator, required: false
-    argument :limit, Integer, required: false
-    argument :offset, Integer, required: false
-    argument :with_image, Boolean, required: false
+    argument :filterOperator, Types::BaseEnums::DatabaseOperator, required: false
+    argument :limit, Integer, required: false, description: "Max number of results"
+    argument :offset, Integer, required: false, description: "Skip number of results"
     
     type [Types::UserType], null: true
 
-    def resolve(filter: nil, filterOperator: "OR", limit: nil, offset: nil, with_image: false)
+    def resolve(filter: nil, filterOperator: "OR", limit: nil, offset: nil)
       users = User.all
       if filter.present?
         where_conditions = []
@@ -27,8 +22,14 @@ module Resolvers
         if where_conditions.any?
           users = users.where(where_conditions.join(" #{filterOperator} "))
         end
+        if defined?(filter[:with_image])
+          if filter[:with_image]
+            users = users.has_attached_image
+          else
+            users = users.without_attached_image
+          end
+        end
       end
-      users = users.has_attached_image if with_image
       users = users.limit(limit) if limit
       users = users.offset(offset) if offset
       users

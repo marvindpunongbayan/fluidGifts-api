@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
   describe "future-proofs" do
     let(:user) { build(:user) }
     it "when validations has other errors" do
-      expect(user.errors.count).to be_zero
+      expect(user.errors).to_not be_present
     end
   end
 end

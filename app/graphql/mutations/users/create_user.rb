@@ -2,7 +2,7 @@ module Mutations
   module Users
     class CreateUser < BaseMutation
       class AuthProviderSignupData < Types::BaseInputObject
-        argument :credentials, Types::AuthProviderCredentialsInput, required: false
+        argument :credentials, Types::BaseInputObjects::AuthProviderCredentialsInput, required: false
       end
 
       argument :name, String, required: true
