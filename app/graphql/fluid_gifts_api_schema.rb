@@ -7,7 +7,7 @@ class FluidGiftsApiSchema < GraphQL::Schema
   #   GraphQL::ExecutionError.new("Unauthorized error", options: {status: :unauthorized, code: 401})
   # end
 
-  rescue_from(ActiveRecord::RecordNotFound) do |err, obj, args, ctx, field|
+  rescue_from ActiveRecord::RecordNotFound do |err, obj, args, ctx, field|
     # Raise a graphql-friendly error with a custom message
     GraphQL::ExecutionError.new("#{field.type.unwrap.graphql_name} not found", options: {status: "NOT_FOUND", code: 401})
   end

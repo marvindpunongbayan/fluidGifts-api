@@ -7,7 +7,7 @@ RSpec.describe Types::QueryType do
   end
   describe "allUsers" do
     let!(:users) { create_pair(:user) }
-    let(:query) do
+    let!(:query) do
       %(query {
         allUsers {#{expected_keys.map{|x| ["imageUrl"].include?(x) ? "#{x}(variant: medium)" : x}.join("\n")}}
       })
@@ -55,7 +55,7 @@ RSpec.describe Types::QueryType do
       )
     end
 
-    let(:query) do
+    let!(:query) do
       %(query {
         allUsers (
           filter: {

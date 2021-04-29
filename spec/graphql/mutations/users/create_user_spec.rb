@@ -4,9 +4,9 @@ module Mutations
   module Users
     RSpec.describe CreateUser, type: :request do
       describe "POST /graphql create_user with proper data " do
-        let(:user_attrs) { attributes_for(:user) }
+        let!(:user_attrs) { attributes_for(:user) }
 
-        let(:query) do
+        let!(:query) do
           %(mutation{
             createUser(
               name: "#{user_attrs[:name]}",
@@ -25,7 +25,7 @@ module Mutations
           })
         end
 
-        let(:expected_response) do
+        let!(:expected_response) do
           {
             "data" => {
               "createUser" => {

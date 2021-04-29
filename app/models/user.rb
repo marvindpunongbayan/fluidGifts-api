@@ -14,5 +14,10 @@ class User < ApplicationRecord
     format: {
       with: /\A([a-z\d+_.-])+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     }
-  validates :password, presence: true, length: { minimum: 3 }
+  validates :password, 
+    presence: true,
+    format: {
+      with: /\A^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$\z/,
+      message: "should atleast 8 characters long and must contain: a capital letter, a lowercase letter, a number, and a special character."
+    }
 end
