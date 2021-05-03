@@ -1,0 +1,9 @@
+module Types
+  module BaseEnums
+    class UserRoleEnum < Types::BaseEnum
+      value 'Customer', value: 'customer'
+      value 'Admin', value: 'admin'
+      value 'Manager', value: 'manager'
+    end
+  end
+end

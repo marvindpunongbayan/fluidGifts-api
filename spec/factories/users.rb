@@ -1,8 +1,9 @@
-# spec/factories.rb
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |i| "User #{i}" }
-    sequence(:email) { |i| "user#{i}@example.com" }
-    sequence(:password) { |i| "AAaa11!!" }
+    name { Faker::DcComics.name }
+    email { Faker::Internet.email }
+    password { "Password1!" }
   end
 end

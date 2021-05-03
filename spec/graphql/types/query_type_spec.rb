@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Types::QueryType do
   let!(:expected_keys) do
-    # if there's changes on UserType fields, it should raise an error for Future-Proofs
+    # if there's changes on Types::UserType fields, it should raise an error for Future-Proofs
     ["id", "name", "email", "imageUrl", "createdAt", "updatedAt"]
   end
   describe "allUsers" do

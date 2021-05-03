@@ -1,21 +1,17 @@
 class FluidGiftsApiSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
-  GraphQL::Batch.use(self)
 
   # rescue_from(ActiveRecord::Unauthorized) do |err, obj, args, ctx, field|
   #   GraphQL::ExecutionError.new("Unauthorized error", options: {status: :unauthorized, code: 401})
   # end
+  # rescue_from ActiveRecord::RecordNotFound do |err, obj, args, ctx, field|
+  #   GraphQL::ExecutionError.new("#{field.type.unwrap.graphql_name} not found", options: {status: "NOT_FOUND", code: 401})
+  # end
 
-  rescue_from ActiveRecord::RecordNotFound do |err, obj, args, ctx, field|
-    # Raise a graphql-friendly error with a custom message
-    GraphQL::ExecutionError.new("#{field.type.unwrap.graphql_name} not found", options: {status: "NOT_FOUND", code: 401})
-  end
-
-  rescue_from ActiveRecord::RecordInvalid do |exception|
-    # Raise a graphql-friendly error with a custom message
-    GraphQL::ExecutionError.new(exception.record.errors.full_messages.join("\n"), options: {status: "INVALID", code: 401})
-  end
+  # rescue_from ActiveRecord::RecordInvalid do |exception|
+  #   GraphQL::ExecutionError.new(exception.record.errors.full_messages.try(:first), options: {status: "INVALID", code: 401})
+  # end
 
   def self.resolve_type(_type, object, _ctx)
     type_class = "::Types::#{object.class}Type".safe_constantize
