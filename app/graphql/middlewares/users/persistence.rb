@@ -9,18 +9,16 @@ module Middlewares
 
       def create(params)
         return current_user if current_user.present?
-
-        User.create!(
-          name: params[:name],
-          email: params[:email],
-          password: params[:password],
-          role: params[:role]
-        )
+        User.create!(clean_params(params))
       end
 
       def update(params)
-        current_user.update!(name: params[:name])
+        current_user.update!(clean_params(params))
         current_user
+      end
+
+      def clean_params(params)        
+        params.reject{|k,v| v.nil? || v.blank? || ['id'].include?(k.to_s)}
       end
     end
   end

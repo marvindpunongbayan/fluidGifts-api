@@ -5,6 +5,9 @@ require 'rails_helper'
 describe Mutations::Users::Update, type: :request do
   let(:user) { create(:user) }
   let(:name) { 'Entrophy' }
+
+  let(:admin) { create(:admin) }
+  let!(:jwt_token) { generate_jwt_test_token(admin) }
   let(:query) do
     <<~GQL
       mutation {
@@ -24,8 +27,8 @@ describe Mutations::Users::Update, type: :request do
   end
 
   describe 'update_user' do
-    context 'managers can update any user' do
-      let(:jwt_token) { generate_jwt_test_token(user) }
+    context 'admins can update any user' do
+      let(:jwt_token) { generate_jwt_test_token(admin) }
 
       subject do
         post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }

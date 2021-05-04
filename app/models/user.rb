@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_one_base64_attached :image
   has_secure_password
 
-  enum role: { customer: 0, admin: 1, manager: 2 }
+  enum role: { customer: 0, admin: 1, vendor: 2 }
 
   scope :has_attached_image, -> { joins(:image_attachment) }
   scope :without_attached_image, -> {where.missing(:image_attachment)}
@@ -23,9 +23,19 @@ class User < ApplicationRecord
       with: /\A^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$\z/,
       message: "should atleast 8 characters long and must contain: a capital letter, a lowercase letter, a number, and a special character."
     }, if: lambda{ new_record? || !password.nil? }
+    
+  after_initialize :setup_new_user, if: :new_record?
 
+  def is_vendor?
+    admin? || vendor?
+  end
 
-  def is_manager?
-    admin? || manager?
+  def editable?(current_user)
+    return false unless current_user
+    current_user.admin? || current_user.id == self.id
+  end
+
+  def setup_new_user
+    self.role ||= :customer
   end
 end

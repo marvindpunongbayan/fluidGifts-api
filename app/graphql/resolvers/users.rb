@@ -1,5 +1,5 @@
 module Resolvers
-  class AllUsers < GraphQL::Schema::Resolver
+  class Users < Resolvers::Base
     class UserFilter < Types::BaseInputObject
       argument :name_contains, String, required: false, description: "Find all string matches"
       argument :email_contains, String, required: false, description: "Find all string matches"
@@ -14,6 +14,7 @@ module Resolvers
     type [Types::UserType], null: true
 
     def resolve(filter: nil, filterOperator: "OR", limit: nil, offset: nil)
+
       users = User.all
       if filter.present?
         where_conditions = []

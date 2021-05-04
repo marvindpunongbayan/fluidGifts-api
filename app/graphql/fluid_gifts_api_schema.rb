@@ -21,7 +21,7 @@ class FluidGiftsApiSchema < GraphQL::Schema
     type_class
   end
 
-  def self.object_from_id(node_id, _ctx)
+  def self.object_from_id(node_id)
     return unless node_id.present?
 
     record_class_name, record_id = GraphQL::Schema::UniqueWithinType.decode(node_id)
@@ -29,8 +29,9 @@ class FluidGiftsApiSchema < GraphQL::Schema
     record_class&.find_by id: record_id
   end
 
-  def self.id_from_object(object, _type, _ctx)
-    GraphQL::Schema::UniqueWithinType.encode(object.class.name, object.id)
-  end
+  # We will use UniqId
+  # def self.id_from_object(object)
+  #   GraphQL::Schema::UniqueWithinType.encode(object.class.name, object.id)
+  # end
 end
 

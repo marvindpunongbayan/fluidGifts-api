@@ -3,7 +3,7 @@ module Types
     class UserRoleEnum < Types::BaseEnum
       value 'Customer', value: 'customer'
       value 'Admin', value: 'admin'
-      value 'Manager', value: 'manager'
+      value 'Vendor', value: 'vendor'
     end
   end
 end

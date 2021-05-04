@@ -17,26 +17,20 @@ gem 'webpacker', '~> 5.0'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # All custom gems, arrange by alphabaetical
 gem 'active_storage_base64'
-gem 'bcrypt'
+gem 'bcrypt' # Use Active Model has_secure_password
 gem 'graphql', '~> 1.9'
-gem 'image_processing'
+gem 'image_processing' # Use Active Storage variant
 gem 'interactor', '~> 3.0'
 gem 'jwt'
 gem 'mini_magick'
 gem 'rack-cors'
 gem 'responders'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

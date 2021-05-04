@@ -1,7 +1,7 @@
 module Mutations
   module Sessions
     class Login < Mutations::BaseMutation
-      graphql_name 'LoginUser'
+      graphql_name 'Login'
 
       argument :email, String, required: true
       argument :password, String, required: true
@@ -13,9 +13,13 @@ module Mutations
       def resolve(email:, password:)
         user = User.find_by email: email
 
+        unless user
+          raise GraphQL::ExecutionError.new("Invalid Email Address / Username", options: {status: "INVALID", code: 401})
+        end
+
         # ensures we have the correct user
-        unless user && user.authenticate(password)
-          raise GraphQL::ExecutionError.new("Invalid email or password", options: {status: "INVALID", code: 401})
+        unless user.authenticate(password)
+          raise GraphQL::ExecutionError.new("Invalid user / password combination", options: {status: "INVALID", code: 401})
         end
 
         token = Middlewares::Jwt::TokenProvider.issue_token(Middlewares::Users::Presenter.new(user).for_token)

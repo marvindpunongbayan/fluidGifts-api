@@ -5,7 +5,7 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
 
-    field :all_users, resolver: Resolvers::AllUsers
+    field :users, resolver: Resolvers::Users
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
@@ -21,9 +21,9 @@ module Types
     #   User.all
     # end
 
-    field :users_with_image, [Types::UserType], null: false, description: "Returns a list of users with image"
-    def users_with_image
-      User.all.has_attached_image
-    end
+    # field :users_with_image, [Types::UserType], null: false, description: "Returns a list of users with image"
+    # def users_with_image
+    #   User.all.has_attached_image
+    # end
   end
 end

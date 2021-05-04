@@ -1,0 +1,2 @@
+class EmailHistory < ApplicationRecord
+end

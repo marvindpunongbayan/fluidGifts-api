@@ -22,6 +22,7 @@ Bundler.require(*Rails.groups)
 
 module FluidGiftsApi
   class Application < Rails::Application
+    config.env_variables = Rails.application.config_for(:env_variables)
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 

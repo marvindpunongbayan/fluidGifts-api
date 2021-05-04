@@ -31,7 +31,7 @@ db/*.sqlite3
 .sass-cache
 /config/config.yml
 /config/database.yml
-/config/credentials.*
+/config/master.key
 /storage/*
 /spec/tmp/*
 /capybara*

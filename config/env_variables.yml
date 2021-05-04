@@ -1,0 +1,11 @@
+production:
+  host: "localhost:3003"
+  domain_name: "localhost"
+
+development:
+  host: "localhost:3003"
+  domain_name: "localhost"
+
+test:
+  host: "localhost:3003"
+  domain_name: "localhost"

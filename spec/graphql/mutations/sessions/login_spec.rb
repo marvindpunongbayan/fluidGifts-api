@@ -35,18 +35,18 @@ describe Mutations::Sessions::Login, type: :request do
     describe 'with wrong login details' do
       subject do
         responses = parse_graphql_complete_response(response.body)['errors'].try(:first)
-        responses.dig("message") if response
+        responses.dig("message") if responses
       end
       context 'invalid email' do
         let(:login_email) { 'invalid@email.es' }
 
-        it { is_expected.to eq('Invalid email or password')}
+        it { is_expected.to eq('Invalid Email Address / Username')}
       end
 
       context 'invalid password' do
         let(:login_password) { 'password' }
 
-        it { is_expected.to eq('Invalid email or password')}
+        it { is_expected.to eq('Invalid user / password combination')}
       end
     end
 
