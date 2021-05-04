@@ -1,11 +1,17 @@
 production:
-  host: "localhost:3003"
+  protocol: "https"
+  backend_host: "localhost:3003"
+  frontend_host: "localhost:3001"
   domain_name: "localhost"
 
 development:
-  host: "localhost:3003"
+  protocol: "http"
+  backend_host: "localhost:3003"
+  frontend_host: "localhost:3001"
   domain_name: "localhost"
 
 test:
-  host: "localhost:3003"
+  protocol: "http"
+  backend_host: "localhost:3003"
+  frontend_host: "localhost:3001"
   domain_name: "localhost"

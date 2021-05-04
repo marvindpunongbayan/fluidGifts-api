@@ -1,6 +1,6 @@
 module Middlewares
   module Jwt
-    class UserAuthenticator
+    class Authenticator
       def self.validate(request_headers)
         @request_headers = request_headers
 

@@ -1,4 +1,5 @@
 class GraphqlController < ApplicationController
+  respond_to :json
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
@@ -26,7 +27,7 @@ class GraphqlController < ApplicationController
     # @current_user ||= AuthToken.user_from_token(params[:token])
 
     # JWT
-    @current_user ||= Middlewares::Jwt::UserAuthenticator.validate(request.headers)
+    @current_user ||= Middlewares::Jwt::Authenticator.validate(request.headers)
   rescue StandardError
     nil
   end

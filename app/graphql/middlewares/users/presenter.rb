@@ -18,7 +18,7 @@ module Middlewares
         {
           user_id: GraphQL::Schema::UniqueWithinType.encode(user.class.name, user.id),
           role: user.role,
-          expire_at: Time.now.strftime("%Y-%m-%d %H:%I:%S")
+          expire_at: (Time.now + 15.minute).strftime("%Y-%m-%d %H:%M:%S")
         }
       end
     end
