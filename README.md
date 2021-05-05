@@ -24,10 +24,10 @@ Things you may want to cover:
 3. Mutations
   - With flexible admin and user auth checker (depends on user’s role)
   - Sessions
-    -- Login
-    -- Forgot Password (with generate token and expiration date)
-    -- Forgot Password Checker for Token Validations
-    -- Change Password (with restrictions)
+    - Login
+    - Forgot Password (with generate token and expiration date)
+    - Forgot Password Checker for Token Validations
+    - Change Password (with restrictions)
   - User Management
-    -- CRUD
-4. Test cases (RSpec)
+    - CRUD
+4. Complete Test cases (RSpec)
