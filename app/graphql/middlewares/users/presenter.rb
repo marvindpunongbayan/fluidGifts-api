@@ -10,14 +10,14 @@ module Middlewares
       def for_token
         {
           user_id: GraphQL::Schema::UniqueWithinType.encode(user.class.name, user.id),
-          role: user.role
+          role: user.try(:role)
         }
       end
 
-      def for_reset_password_token
+      def for_forgot_password_token
         {
           user_id: GraphQL::Schema::UniqueWithinType.encode(user.class.name, user.id),
-          role: user.role,
+          role: user.try(:role),
           expire_at: (Time.now + 15.minute).strftime("%Y-%m-%d %H:%M:%S")
         }
       end

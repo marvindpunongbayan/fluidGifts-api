@@ -8,8 +8,8 @@ module Middlewares
       end
 
       def create(params)
-        return current_user if current_user.present?
-        User.create!(clean_params(params))
+        user = User.create!(clean_params(params))
+        user
       end
 
       def update(params)

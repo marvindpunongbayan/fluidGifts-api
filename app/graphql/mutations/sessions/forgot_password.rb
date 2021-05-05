@@ -15,7 +15,7 @@ module Mutations
         end
 
         # Send notification and should have reset password link
-        token = Middlewares::Jwt::TokenProvider.issue_token(Middlewares::Users::Presenter.new(user).for_reset_password_token)
+        token = Middlewares::Jwt::TokenProvider.issue_token(Middlewares::Users::Presenter.new(user).for_forgot_password_token)
         SessionsMailer.forgot_password(user, token).deliver!
         
         {errors: []}

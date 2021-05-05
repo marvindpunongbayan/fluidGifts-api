@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SessionsMailer, type: :mailer do
   describe "forgot_password" do
     let(:user) { create(:user) }
-    let!(:token) { generate_jwt_reset_password_test_token(user) }
+    let!(:token) { generate_jwt_forgot_password_test_token(user) }
     let(:mail) { SessionsMailer.forgot_password(user, token) }
 
     it "renders the headers" do

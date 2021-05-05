@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 describe Mutations::Users::Create, type: :request do
@@ -7,6 +5,8 @@ describe Mutations::Users::Create, type: :request do
   let(:name) { 'November Doom' }
   let(:email) { 'november@doom.com' }
   let(:password) { 'Password1!' }
+  let(:admin) { create(:admin) }
+  let!(:jwt_token) { generate_jwt_test_token(admin) }
   let(:result_info) do
     <<~RESULT
       {
@@ -32,22 +32,35 @@ describe Mutations::Users::Create, type: :request do
   end
 
   describe 'create_user' do
-    subject do
-      post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      parse_graphql_response(response.body)['createUser']
-    end
+    context 'when there is a logged in admin user' do
+      let!(:jwt_token) { generate_jwt_test_token(admin) }
 
-    context 'when there is a logged in user' do
-      let!(:jwt_token) { generate_jwt_test_token(user) }
-
-      it { is_expected.to include 'user' => { 'name' => user.name } }
+      subject do
+        post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+        parse_graphql_response(response.body)['createUser']
+      end
+      it { is_expected.to include 'user' => { 'name' => name} }
       it { is_expected.to include 'errors' => [] }
     end
+    context 'when there is a logged in non-admin user' do
+      let(:non_admin) { create(:user) }
+      let!(:jwt_token) { generate_jwt_test_token(non_admin) }
 
-    context 'when there is no user' do
-      let!(:jwt_token) {}
-      it { is_expected.to include 'user' => { 'name' => 'November Doom' } }
-      it { is_expected.to include 'errors' => [] }
+      subject do
+        post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+        responses = parse_graphql_complete_response(response.body)['errors'].try(:first)
+        responses.dig("message") if responses
+      end
+      it { is_expected.to eq("You don't have privilege to do this action")}
+    end
+    context 'when there is no logged-in user' do
+      let!(:jwt_token) { }
+      subject do
+        post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+        responses = parse_graphql_complete_response(response.body)['errors'].try(:first)
+        responses.dig("message") if responses
+      end
+      it { is_expected.to eq("Invalid user, please try again later")}
     end
   end
 end
