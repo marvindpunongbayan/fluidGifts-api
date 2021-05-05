@@ -13,7 +13,8 @@ Things you may want to cover:
 1. User Structure
   - Basic details (name, email, password)
   - Role (customer, admin, vendor)
-  - With image upload using base64 image hash (Dynamic image variant)
+  - With image upload using base64 image hash
+    - Dynamic Image Variant (Thumb, Medium)
   - Complete validations especially password (8 characters long and must contain: a capital letter, a lowercase letter, a number, and a special character.)
 2. Flexible Resolvers Users
   - Will return all the users
@@ -31,3 +32,4 @@ Things you may want to cover:
   - User Management
     - CRUD
 4. Complete Test cases (RSpec)
+5. Etc...
